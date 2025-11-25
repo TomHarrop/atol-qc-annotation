@@ -24,7 +24,7 @@ classifiers = [
 ]
 
 [project.scripts]
-atol-qc-raw-ont = "atol_qc_annotation.__main__:main"
+atol-qc-annotation = "atol_qc_annotation.__main__:main"
 
 [project.urls]
 Homepage = "https://github.com/tomharrop/atol-qc-annotation"

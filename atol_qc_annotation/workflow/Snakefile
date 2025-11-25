@@ -1,0 +1,14 @@
+import tempfile
+
+
+globals().update(config)
+
+workingdir = tempfile.mkdtemp()
+
+
+if gtf:
+    # gff variable is set by this rule
+    include: "rules/convert_gtf_to_gff.smk"
+
+
+raise ValueError(gff)
