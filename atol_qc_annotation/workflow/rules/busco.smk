@@ -26,24 +26,3 @@ rule busco:
         "&> {log}; "
         "cp {params.outdir}/short_summary.specific.{params.lineage}.{wildcards.genome}.json {output.json}"
 
-
-rule extract_proteins:
-    input:
-        gtf="results/tiberius/{genome}.gtf",
-        genome="data/genomes/{genome}.fasta",
-    output:
-        protein="results/tiberius/proteins/{genome}.faa",
-    resources:
-        mem="32G",
-        runtime=60,
-    log:
-        "logs/agat_extract/{genome}.log",
-    container:
-        agat
-    shell:
-        "agat_sp_extract_sequences.pl "
-        "--gff {input.gtf} "
-        "--fasta {input.genome} "
-        "--protein "
-        "--output {output.protein} "
-        "&> {log}"

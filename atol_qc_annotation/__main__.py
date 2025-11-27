@@ -6,6 +6,7 @@ from importlib.metadata import metadata, files
 from pathlib import Path
 from snakemake.logging import logger
 import argparse
+import tempfile
 from snakemake.api import (
     ConfigSettings,
     DAGSettings,
@@ -40,21 +41,21 @@ def parse_arguments():
     annot_group = input_group.add_mutually_exclusive_group(required=True)
 
     annot_group.add_argument(
-        "--gff",
-        "-g",
+        "--gtf",
         type=Path,
-        help="Path to the genome annotation GFF file",
-        dest="gff",
+        help="Path to the genome annotation GTF file.",
+        dest="gtf",
     )
 
     annot_group.add_argument(
-        "--gtf",
+        "--gff",
+        "-g",
         type=Path,
         help=(
-            "Path to the genome annotation GTF file. "
-            "NOTE: will be converted to GFF for analysis."
+            "Path to the genome annotation GFF file"
+            "NOTE: will be converted to GTF for analysis."
         ),
-        dest="gtf",
+        dest="gff",
     )
 
     # tool settings
@@ -79,7 +80,27 @@ def parse_arguments():
     # outputs
     output_group = parser.add_argument_group("Output")
 
+    output_group.add_argument(
+        "--outdir",
+        required=True,
+        type=posixpath,
+        help="Output directory",
+        dest="outdir",
+    )
+
+    output_group.add_argument(
+        "--logs",
+        required=False,
+        type=posixpath,
+        help="Log output directory. Default: logs are discarded.",
+        dest="logs_directory",
+    )
+
     return parser.parse_args()
+
+
+def posixpath(x):
+    return Path(x).as_posix()
 
 
 def main():
@@ -110,6 +131,10 @@ def main():
     args = parse_arguments()
     logger.debug(f"Entrypoint args:\n    {args}")
 
+    # set up a working directory for this run
+    workingdir = tempfile.mkdtemp()
+    args.workingdir = workingdir
+
     # control output
     output_settings = OutputSettings(
         quiet={
@@ -137,9 +162,7 @@ def main():
         config=args.__dict__, configfiles=[container_config]
     )
     execution_settings = ExecutionSettings(lock=False)
-    storage_settings = StorageSettings(
-        # notemp=True
-    )
+    storage_settings = StorageSettings(notemp=True)
     deployment_settings = DeploymentSettings(
         deployment_method=[DeploymentMethod.APPTAINER]
     )

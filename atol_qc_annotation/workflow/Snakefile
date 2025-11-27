@@ -1,14 +1,21 @@
-import tempfile
-
+#!/usr/bin/env python3
 
 globals().update(config)
 
-workingdir = tempfile.mkdtemp()
+if not logs_directory:
+    logger.info("Not keeping logs")
+    logs_directory = workingdir
+else:
+    logger.info(f"Saving logs to {logs_directory}")
 
 
-if gtf:
-    # gff variable is set by this rule
-    include: "rules/convert_gtf_to_gff.smk"
+include: "rules/agat.smk"
+include: "rules/extract_proteins.smk"
+include: "rules/utils.smk"
 
 
-raise ValueError(gff)
+rule target:
+    default_target: True
+    input:
+        rules.check_protein_fasta_file.output,
+        rules.agat_sp_statistics.output,
