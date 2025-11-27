@@ -1,28 +1,30 @@
 #!/usr/bin/env python3
 
+
 rule busco:
     input:
-        protein="results/tiberius/proteins/{genome}.faa",
+        proteins=Path(outdir, "proteins.faa"),
+        busco_db=Path(lineages_path, lineage_dataset),
     output:
-        json="results/tiberius/busco/{genome}/{genome}.json",
+        json=Path(
+            outdir, "busco", f"short_summary.specific.{lineage_dataset}.busco.json"
+        ),
+        txt=Path(outdir, "busco", f"short_summary.specific.{lineage_dataset}.busco.txt"),
     params:
-        busco_db=get_busco_db,
-        lineage=get_lineage_name,
-        outdir="results/tiberius/busco/{genome}",
-    resources:
-        mem="32G",
-        runtime=180,
+        outdir=subpath(output.json, parent=True),
     log:
-        "logs/busco/{genome}.log",
+        Path(logs_directory, "busco.log"),
     container:
-        busco
+        containers["busco"]
+    shadow:
+        "minimal"
     shell:
         "busco "
-        "-i {input.protein} "
-        "-o {params.outdir} "
-        "-l {params.busco_db} "
-        "-m protein "
+        "--cpu {threads} "
         "--force "
-        "&> {log}; "
-        "cp {params.outdir}/short_summary.specific.{params.lineage}.{wildcards.genome}.json {output.json}"
-
+        "--in {input.proteins} "
+        "--lineage_dataset {input.busco_db} "
+        "--mode protein "
+        "--offline "
+        "--out {params.outdir} "
+        "&> {log} "

@@ -11,5 +11,7 @@ test_braker_gtf:
 	-m atol_qc_annotation.__main__ \
 		--fasta test-data/genome.fa \
 		--gtf test-data/braker.gtf \
+		--lineage_dataset eukaryota_odb10 \
+		--lineages_path test-data/busco/lineages \
 		--outdir test-output/test_braker_gtf \
 		--logs test-output/test_braker_gtf/logs 

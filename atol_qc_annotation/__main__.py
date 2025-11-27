@@ -72,7 +72,7 @@ def parse_arguments():
 
     busco_group.add_argument(
         "--lineages_path",
-        type=Path,
+        type=posixpath,
         help="Path to the BUSCO lineages directory.",
         dest="lineages_path",
     )
