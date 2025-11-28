@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
 
+omark_files = [
+    "_detailed_summary.txt",
+    ".omq",
+    ".pdf",
+    ".png",
+    ".sum",
+    ".tax",
+    ".ump",
+]
+
 
 rule omark:
     input:
@@ -7,9 +17,10 @@ rule omark:
         db=omamer_db,
         ete_ncbi_db=ete_ncbi_db,
     output:
-        omark=directory(Path(outdir, "omark")),
+        multiext(Path(outdir, "omark", "proteins").as_posix(), *omark_files),
     params:
         taxid=taxid,
+        outdir=subpath(output[0], parent=True),
     log:
         Path(logs_directory, "omamer_search.log"),
     container:
@@ -20,7 +31,7 @@ rule omark:
         "--database {input.db} "
         "--ete_ncbi_db {input.ete_ncbi_db} "
         "--taxid {params.taxid} "
-        "--outputFolder {output.omark} "
+        "--outputFolder {params.outdir} "
         "&> {log}"
 
 
