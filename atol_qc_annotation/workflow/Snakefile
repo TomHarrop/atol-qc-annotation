@@ -13,11 +13,13 @@ include: "rules/agat.smk"
 include: "rules/busco.smk"
 include: "rules/extract_proteins.smk"
 include: "rules/utils.smk"
+include: "rules/omark.smk"
 
 
 rule target:
     default_target: True
     input:
-        rules.agat_sp_statistics.output,
-        rules.busco.output,
-        rules.check_protein_fasta_file.output,
+        # rules.agat_sp_statistics.output,
+        # rules.busco.output,
+        # rules.check_protein_fasta_file.output,
+        rules.omark.output,

@@ -13,5 +13,8 @@ test_braker_gtf:
 		--gtf test-data/braker.gtf \
 		--lineage_dataset embryophyta_odb10 \
 		--lineages_path test-data/busco/lineages \
+		--db test-data/omark/LUCA.h5 \
+		--taxid 3702 \
+		--ete_ncbi_db test-data/omark/ete/taxa.sqlite \
 		--outdir test-output/test_braker_gtf \
 		--logs test-output/test_braker_gtf/logs 

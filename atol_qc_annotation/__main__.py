@@ -26,6 +26,16 @@ def parse_arguments():
 
     # options
     parser.add_argument("-t", "--threads", type=int, default=16, dest="threads")
+
+    parser.add_argument(
+        "-m",
+        "--mem",
+        help="Intended maximum RAM in GB.",
+        type=int,
+        default=32,
+        dest="mem_gb",
+    )
+
     parser.add_argument("-n", help="Dry run", dest="dry_run", action="store_true")
 
     # inputs
@@ -64,6 +74,7 @@ def parse_arguments():
     busco_group.add_argument(
         "--lineage_dataset",
         "-l",
+        required=True,
         default="eukaryota_odb10",
         type=str,
         help="Specify the name of the BUSCO lineage to be used. Default: eukaryota_odb10",
@@ -72,9 +83,34 @@ def parse_arguments():
 
     busco_group.add_argument(
         "--lineages_path",
+        required=True,
         type=posixpath,
         help="Path to the BUSCO lineages directory.",
         dest="lineages_path",
+    )
+
+    omark_group = parser.add_argument_group("OMArk settings")
+    omark_group.add_argument(
+        "--db",
+        type=posixpath,
+        help="OMAmer database",
+        required=True,
+        dest="omamer_db",
+    )
+    omark_group.add_argument(
+        "--taxid",
+        type=int,
+        help="NCBI Taxonomy ID",
+        required=True,
+        dest="taxid",
+    )
+
+    omark_group.add_argument(
+        "--ete_ncbi_db",
+        type=posixpath,
+        help="Path to the ete3 NCBI database to be used.",
+        required=True,
+        dest="ete_ncbi_db",
     )
 
     # outputs
@@ -148,6 +184,7 @@ def main():
     # set cores.
     resource_settings = ResourceSettings(
         cores=args.threads,
+        resources={"mem_mb": int(args.mem_gb * 1024)},
         overwrite_resource_scopes={
             "mem": "global",
             "threads": "global",
