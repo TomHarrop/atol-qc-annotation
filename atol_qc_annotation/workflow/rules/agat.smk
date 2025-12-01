@@ -63,7 +63,7 @@ rule agat_sp_flag_premature_stop_codons:
 
 rule agat_sp_filter_incomplete_gene_coding_models:
     input:
-        gtf=gtf,
+        gtf=Path(workingdir, "input.gtf"),
         fasta=Path(workingdir, "genome.fasta"),
     output:
         gff=temp(Path(workingdir, "agat.filter_incomplete.gff")),

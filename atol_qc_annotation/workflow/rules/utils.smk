@@ -1,6 +1,15 @@
 #!/usr/bin/env python3
 
 
+rule collect_gtf:
+    input:
+        gtf,
+    output:
+        temp(Path(workingdir, "input.gtf")),
+    shell:
+        "cp {input} {output}"
+
+
 rule collect_genome_fasta_file:
     input:
         fasta=fasta,
