@@ -7,4 +7,5 @@
   - [ ] BioConda recipe
 - [x] Eliminate the use of temporary directories (use `temp` instead)
 - [ ] Set the resources
+- [ ] Implement Gff to GTF conversion
 - [ ] Test with helixer/funannotate/tiberius output
