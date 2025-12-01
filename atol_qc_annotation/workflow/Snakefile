@@ -10,6 +10,10 @@ else:
     logger.info(f"Saving logs to {logs_directory}")
 
 
+if dev_container:
+    container: dev_container
+
+
 include: "rules/agat.smk"
 include: "rules/busco.smk"
 include: "rules/extract_proteins.smk"

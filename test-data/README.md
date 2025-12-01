@@ -28,3 +28,8 @@ genome.fa
 
 braker.gtf
 : https://github.com/Gaius-Augustus/BRAKER/blob/master/example/results/test3_4/braker.gtf
+
+
+#### Rgram tests
+
+Private data - from Jane Tung's annotation project.

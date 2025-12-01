@@ -36,6 +36,13 @@ def parse_arguments():
         dest="mem_gb",
     )
 
+    parser.add_argument(
+        "--dev_container",
+        help="For development use. Specify a container to run all the jobs in.",
+        type=str,
+        dest="dev_container",
+    )
+
     parser.add_argument("-n", help="Dry run", dest="dry_run", action="store_true")
 
     # inputs
@@ -201,9 +208,10 @@ def main():
     config_settings = ConfigSettings(config=args.__dict__, configfiles=configfiles)
     execution_settings = ExecutionSettings(lock=False)
     storage_settings = StorageSettings(notemp=True)
-    deployment_settings = DeploymentSettings(
-        # deployment_method=[DeploymentMethod.APPTAINER]
-    )
+
+    # use apptainer if there is a dev container
+    deployment_method = [DeploymentMethod.APPTAINER] if args.dev_container else []
+    deployment_settings = DeploymentSettings(deployment_method=deployment_method)
 
     with SnakemakeApi(output_settings) as snakemake_api:
         workflow_api = snakemake_api.workflow(

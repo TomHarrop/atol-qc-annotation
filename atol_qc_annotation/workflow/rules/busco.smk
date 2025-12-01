@@ -14,8 +14,8 @@ rule busco:
         outdir=subpath(output.json, parent=True),
     log:
         Path(logs_directory, "busco.log"),
-    container:
-        containers["busco"]
+    benchmark:
+        Path(logs_directory, "busco.stats")
     shadow:
         "minimal"
     shell:

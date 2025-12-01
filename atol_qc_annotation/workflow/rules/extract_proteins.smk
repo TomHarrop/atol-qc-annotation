@@ -8,8 +8,6 @@ rule check_protein_fasta_file:
         proteins=Path(outdir, "proteins.faa"),
     log:
         Path(logs_directory, "check_protein_fasta_file.log"),
-    container:
-        containers["bbmap"]
     shell:
         "reformat.sh "
         "fixheaders=t "
@@ -28,8 +26,8 @@ rule extract_proteins:
         proteins=temp(Path(workingdir, "proteins.faa")),
     log:
         Path(logs_directory, "extract_proteins.log"),
-    container:
-        containers["agat"]
+    benchmark:
+        Path(logs_directory, "extract_proteins.stats"),
     shadow:
         "minimal"
     shell:

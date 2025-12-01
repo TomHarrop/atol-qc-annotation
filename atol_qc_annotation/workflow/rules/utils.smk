@@ -23,8 +23,8 @@ rule collect_genome_fasta_file:
         temp(Path(workingdir, "genome.fasta")),
     log:
         Path(logs_directory, "collect_genome_fasta_file.log"),
-    container:
-        containers["bbmap"]
+    benchmark:
+        Path(logs_directory, "collect_genome_fasta_file.stats"),
     shell:
         "reformat.sh "
         "fixheaders=t "

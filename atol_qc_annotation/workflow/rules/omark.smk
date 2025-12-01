@@ -23,8 +23,8 @@ rule omark:
         outdir=subpath(output[0], parent=True),
     log:
         Path(logs_directory, "omamer_search.log"),
-    container:
-        containers["omark"]
+    benchmark:
+        Path(logs_directory, "omamer_search.stats"),
     shell:
         "omark  "
         "--file {input.file} "
@@ -43,8 +43,8 @@ rule omamer_search:
         file=temp(Path(workingdir, "proteins.omamer")),
     log:
         Path(logs_directory, "omamer_search.log"),
-    container:
-        containers["omark"]
+    benchmark:
+        Path(logs_directory, "omamer_search.stats")
     shell:
         "omamer search "
         "--db {input.db} "

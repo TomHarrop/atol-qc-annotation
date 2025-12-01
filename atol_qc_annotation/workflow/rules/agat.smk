@@ -8,8 +8,8 @@ rule agat_sp_statistics:
         yaml=Path(outdir, "agat.stats.yaml"),
     log:
         Path(logs_directory, "agat_sp_statistics.log"),
-    container:
-        containers["agat"]
+    benchmark:
+        Path(logs_directory, "agat_sp_statistics.stats")
     shadow:
         "minimal"
     shell:
@@ -29,8 +29,8 @@ rule agat_sp_fix_cds_phases:
         gff=Path(outdir, "agat.fix_cds_phases.gff"),
     log:
         Path(logs_directory, "agat_sp_fix_cds_phases.log"),
-    container:
-        containers["agat"]
+    benchmark:
+        Path(logs_directory, "agat_sp_fix_cds_phases.stats")
     shadow:
         "minimal"
     shell:
@@ -49,8 +49,8 @@ rule agat_sp_flag_premature_stop_codons:
         gff=temp(Path(workingdir, "agat.flag_premature.gff")),
     log:
         Path(logs_directory, "agat_sp_flag_premature_stop_codons.log"),
-    container:
-        containers["agat"]
+    benchmark:
+        Path(logs_directory, "agat_sp_flag_premature_stop_codons.stats")
     shadow:
         "minimal"
     shell:
@@ -68,11 +68,9 @@ rule agat_sp_filter_incomplete_gene_coding_models:
     output:
         gff=temp(Path(workingdir, "agat.filter_incomplete.gff")),
     log:
-        Path(
-            logs_directory, "agat_sp_filter_incomplete_gene_coding_models.log"
-        ).as_posix(),
-    container:
-        containers["agat"]
+        Path(logs_directory, "agat_sp_filter_incomplete_gene_coding_models.log"),
+    benchmark:
+        Path(logs_directory, "agat_sp_filter_incomplete_gene_coding_models.stats")
     shadow:
         "minimal"
     shell:
