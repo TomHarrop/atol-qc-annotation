@@ -37,11 +37,11 @@ $(RESULTDIR)/rgram/%/agat.stats.yaml: $$(if $$(wildcard test-data/rgram/$$*.gtf)
 		--logs $(RESULTDIR)/rgram/$*/logs 
 
 
-profiling:
-	mkdir -p $(RESULTDIR)/profiling
-test_braker_gtf: profiling
-	python3 -m cProfile -o "test-output/profiling/test_braker_gtf.cProfile.stats" \
+test_braker_gtf: 
+	$(dir_guard) ;
+	python3 -m cProfile -o "test-output/test_braker_gtf/cProfile.stats" \
 	-m atol_qc_annotation.__main__ \
+		--threads 12 \
 		--dev_container "atol-qc-annotation---0.0.2--pyhdfd78af_0.sif" \
 		--fasta test-data/genome.fa \
 		--gtf test-data/braker.gtf \
