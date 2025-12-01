@@ -140,6 +140,7 @@ def posixpath(x):
 
 
 def main():
+
     # print version info
     pkg_metadata = metadata(__package__)
 
@@ -157,18 +158,20 @@ def main():
     else:
         raise FileNotFoundError("Could not find a Snakefile")
 
-    container_config = Path(package_path, "config", "containers.yaml")
-    if container_config.is_file():
-        logger.debug(f"Using container_config {container_config}")
-    else:
-        raise FileNotFoundError("Could not find container_config")
-
     # get arguments
     args = parse_arguments()
     logger.debug(f"Entrypoint args:\n    {args}")
 
+    # decide if we're using the container config
+    container_config = Path(package_path, "config", "containers.yaml")
+    if container_config.is_file():
+        logger.debug(f"Using container_config {container_config}")
+        configfiles = [container_config]
+    else:
+        raise FileNotFoundError("Could not find container_config")
+
     # set up a working directory for this run
-    workingdir = tempfile.mkdtemp()
+    workingdir = Path(args.outdir, "tmp").as_posix()
     args.workingdir = workingdir
 
     # control output
@@ -195,13 +198,11 @@ def main():
     dag_settings = DAGSettings(rerun_triggers={RerunTrigger.INPUT})
 
     # other settings
-    config_settings = ConfigSettings(
-        config=args.__dict__, configfiles=[container_config]
-    )
+    config_settings = ConfigSettings(config=args.__dict__, configfiles=configfiles)
     execution_settings = ExecutionSettings(lock=False)
     storage_settings = StorageSettings(notemp=True)
     deployment_settings = DeploymentSettings(
-        deployment_method=[DeploymentMethod.APPTAINER]
+        # deployment_method=[DeploymentMethod.APPTAINER]
     )
 
     with SnakemakeApi(output_settings) as snakemake_api:

@@ -25,7 +25,7 @@ rule extract_proteins:
         gff=Path(outdir, "agat.fix_cds_phases.gff"),
         genome=Path(workingdir, "genome.fasta"),
     output:
-        proteins=Path(workingdir, "proteins.faa"),
+        proteins=temp(Path(workingdir, "proteins.faa")),
     log:
         Path(logs_directory, "extract_proteins.log"),
     container:

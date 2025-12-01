@@ -40,7 +40,7 @@ rule omamer_search:
         db=omamer_db,
         query=Path(outdir, "proteins.faa"),
     output:
-        file=Path(workingdir, "proteins.omamer"),
+        file=temp(Path(workingdir, "proteins.omamer")),
     log:
         Path(logs_directory, "omamer_search.log"),
     container:

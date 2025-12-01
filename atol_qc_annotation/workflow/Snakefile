@@ -2,6 +2,7 @@
 
 globals().update(config)
 
+
 if not logs_directory:
     logger.info("Not keeping logs")
     logs_directory = workingdir
@@ -21,5 +22,4 @@ rule target:
     input:
         rules.agat_sp_statistics.output,
         rules.busco.output,
-        rules.check_protein_fasta_file.output,
         rules.omark.output,

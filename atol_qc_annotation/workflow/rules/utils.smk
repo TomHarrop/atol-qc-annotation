@@ -11,7 +11,7 @@ else:
         input:
             gtf,
         output:
-            Path(workingdir, "input.gtf"),
+            temp(Path(workingdir, "input.gtf")),
         shell:
             "cp {input} {output}"
 
@@ -20,7 +20,7 @@ rule collect_genome_fasta_file:
     input:
         fasta=fasta,
     output:
-        Path(workingdir, "genome.fasta"),
+        temp(Path(workingdir, "genome.fasta")),
     log:
         Path(logs_directory, "collect_genome_fasta_file.log"),
     container:

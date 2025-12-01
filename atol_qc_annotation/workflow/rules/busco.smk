@@ -27,4 +27,4 @@ rule busco:
         "--mode protein "
         "--offline "
         "--out {params.outdir} "
-        "&> {log} "
+        "&> {log}"

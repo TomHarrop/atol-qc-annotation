@@ -46,7 +46,7 @@ rule agat_sp_flag_premature_stop_codons:
         gff=Path(workingdir, "agat.filter_incomplete.gff"),
         fasta=Path(workingdir, "genome.fasta"),
     output:
-        gff=Path(workingdir, "agat.flag_premature.gff"),
+        gff=temp(Path(workingdir, "agat.flag_premature.gff")),
     log:
         Path(logs_directory, "agat_sp_flag_premature_stop_codons.log"),
     container:
@@ -60,12 +60,13 @@ rule agat_sp_flag_premature_stop_codons:
         "--output {output.gff} "
         "&> {log}"
 
+
 rule agat_sp_filter_incomplete_gene_coding_models:
     input:
         gtf=Path(workingdir, "input.gtf"),
         fasta=Path(workingdir, "genome.fasta"),
     output:
-        gff=Path(workingdir, "agat.filter_incomplete.gff"),
+        gff=temp(Path(workingdir, "agat.filter_incomplete.gff")),
     log:
         Path(
             logs_directory, "agat_sp_filter_incomplete_gene_coding_models.log"

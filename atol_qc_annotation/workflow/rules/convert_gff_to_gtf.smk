@@ -5,7 +5,7 @@ rule convert_gff_to_gtf:
     input:
         gff,
     output:
-        Path(workingdir, "input.gtf"),
+        temp(Path(workingdir, "input.gtf")),
     container:
         containers["gffread"]
     shell:
