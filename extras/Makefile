@@ -24,6 +24,7 @@ $(RESULTDIR)/rgram/%/agat.stats.yaml: $$(if $$(wildcard test-data/rgram/$$*.gtf)
 	$(dir_guard) ;
 	python3 -m cProfile -o $(RESULTDIR)/rgram/$*/cProfile.stats \
 		-m atol_qc_annotation.__main__ \
+		--threads 12 \
 		--dev_container "atol-qc-annotation---0.0.2--pyhdfd78af_0.sif" \
 		--fasta test-data/rgram/R_gram.fasta \
 		--gtf $< \

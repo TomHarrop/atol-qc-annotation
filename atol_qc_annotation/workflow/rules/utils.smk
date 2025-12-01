@@ -1,20 +1,5 @@
 #!/usr/bin/env python3
 
-if gff:
-
-    # gtf variable is set by this rule
-    include: "convert_gff_to_gtf.smk"
-
-else:
-
-    rule collect_gtf:
-        input:
-            gtf,
-        output:
-            temp(Path(workingdir, "input.gtf")),
-        shell:
-            "cp {input} {output}"
-
 
 rule collect_genome_fasta_file:
     input:
@@ -24,7 +9,7 @@ rule collect_genome_fasta_file:
     log:
         Path(logs_directory, "collect_genome_fasta_file.log"),
     benchmark:
-        Path(logs_directory, "collect_genome_fasta_file.stats"),
+        Path(logs_directory, "collect_genome_fasta_file.stats")
     shell:
         "reformat.sh "
         "fixheaders=t "

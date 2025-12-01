@@ -22,9 +22,9 @@ rule omark:
         taxid=taxid,
         outdir=subpath(output[0], parent=True),
     log:
-        Path(logs_directory, "omamer_search.log"),
+        Path(logs_directory, "omark.log"),
     benchmark:
-        Path(logs_directory, "omamer_search.stats"),
+        Path(logs_directory, "omark.stats")
     shell:
         "omark  "
         "--file {input.file} "
@@ -45,6 +45,7 @@ rule omamer_search:
         Path(logs_directory, "omamer_search.log"),
     benchmark:
         Path(logs_directory, "omamer_search.stats")
+    threads: int(workflow.cores - 1)
     shell:
         "omamer search "
         "--db {input.db} "

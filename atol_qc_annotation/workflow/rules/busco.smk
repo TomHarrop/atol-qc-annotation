@@ -16,6 +16,7 @@ rule busco:
         Path(logs_directory, "busco.log"),
     benchmark:
         Path(logs_directory, "busco.stats")
+    threads: int(workflow.cores - 1)
     shadow:
         "minimal"
     shell:

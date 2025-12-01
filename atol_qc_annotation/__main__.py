@@ -55,24 +55,14 @@ def parse_arguments():
         help="Path to the genome assembly FASTA file",
         dest="fasta",
     )
-    annot_group = input_group.add_mutually_exclusive_group(required=True)
-
-    annot_group.add_argument(
+    input_group.add_argument(
         "--gtf",
         type=Path,
-        help="Path to the genome annotation GTF file.",
-        dest="gtf",
-    )
-
-    annot_group.add_argument(
-        "--gff",
-        "-g",
-        type=Path,
         help=(
-            "Path to the genome annotation GFF file"
-            "NOTE: will be converted to GTF for analysis."
+            "Path to the genome annotation GTF file. "
+            "NOTE: If you provide a gff, it will be converted to GTF for analysis."
         ),
-        dest="gff",
+        dest="gtf",
     )
 
     # tool settings
