@@ -10,4 +10,12 @@
 - [ ] Implement Gff to GTF conversion
 - [ ] Test with helixer/funannotate/tiberius output
 - [ ] OMARK: tool and DB version
+  - for the DB:  
+    ```python
+    import tables
+    db="test-data/omark/LUCA.h5"
+    x=tables.open_file(db, mode='r')
+    x.get_node_attr("/", "omamer_version")
+    ```
+
 - [ ] OMARK: parse whole result/conserv lines
