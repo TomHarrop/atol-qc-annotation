@@ -6,7 +6,7 @@ Inspired by / based on https://github.com/DessimozLab/OMArk/blob/main/utils/plot
 
 import re
 import sys
-
+import json
 
 # Parsing config. Keys are the name of the item. Value is a tuple of type,
 # regex string and index in result.
@@ -52,6 +52,23 @@ result_line_regexes = {
     ),
 }
 
+conserv_line_regexes = {
+    "counts": (
+        r"""^S:(?P<single>\d+)"""
+        r""",D:(?P<duplicated>\d+)"""
+        r"""\[U:(?P<duplicated_unexpected>\d+),"""
+        r"""E:(?P<duplicated_expected>\d+)\],"""
+        r"""M:(?P<missing>\d+)\s*$"""
+    ),
+    "pcts": (
+        r"""^S:(?P<single>\d+(?:\.\d+)?)%"""
+        r""",D:(?P<duplicated>\d+(?:\.\d+)?)%"""
+        r"""\[U:(?P<duplicated_unexpected>\d+(?:\.\d+)?)%,"""
+        r"""E:(?P<duplicated_expected>\d+(?:\.\d+)?)%\],"""
+        r"""M:(?P<missing>\d+(?:\.\d+)?)%\s*$"""
+    ),
+}
+
 
 def single_line_search(line, single_line_regexes):
     for k, v in single_line_regexes.items():
@@ -85,7 +102,6 @@ def main():
     detected_species = []
 
     lines = [x.rstrip() for x in sys.stdin.read().splitlines()]
-    print(lines)
     for line in lines:
         if not in_contaminant_line:
             search_result = single_line_search(line, single_line_regexes)
@@ -103,6 +119,18 @@ def main():
             if results_pcts:
                 results_dict["results_pcts"] = results_pcts
 
+            conserv_counts = results_line_search(
+                line, int, conserv_line_regexes["counts"]
+            )
+            if conserv_counts:
+                results_dict["conserv_counts"] = conserv_counts
+
+            conserv_pcts = results_line_search(
+                line, float, conserv_line_regexes["pcts"]
+            )
+            if conserv_pcts:
+                results_dict["conserv_pcts"] = conserv_pcts
+
             # The contaminant section comes directly after this header until
             # the end of the file.
             if line == "#From HOG placement, the detected species are:":
@@ -111,12 +139,28 @@ def main():
         else:
             # THIS IS THE CONTAMINANT SECTION
             # skip blanks and the defline
-            if line.startswith("#") or line == "":
+            if line == "":
                 continue
-            detected_species.append(line.strip().split("\t"))
 
-    raise ValueError(results_dict)
+            if line.startswith("#"):
+                splits = line.split("\t")
+                headers = [
+                    re.sub(r"\s+", "_", re.sub(r"[^A-Za-z\s]", "", s)).strip("_")
+                    for s in splits
+                ]
+                continue
 
+            contam_splits = line.strip().split("\t")
+            if len(headers) == len(contam_splits):
+                detected_species.append(dict(zip(headers, contam_splits)))
+            else:
+                raise ValueError("wtf")
+
+    # add the contaminants ("detected species") to the results
+    results_dict["detected_species"] = detected_species
+
+    # write the output
+    json.dump(results_dict, sys.stdout)
 
 if __name__ == "__main__":
     main()
