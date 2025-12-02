@@ -11,6 +11,22 @@ omark_files = [
 ]
 
 
+rule parse_omark_sum_file:
+    input:
+        sum_file=Path(outdir, "omark", "proteins.sum"),
+    output:
+        json=Path(outdir, "omark_summary.json"),
+    log:
+        Path(logs_directory, "parse_omark_sum_file.log"),
+    benchmark:
+        Path(logs_directory, "parse_omark_sum_file.stats")
+    shell:
+        "parse-omark-sum-file "
+        "<{input.sum_file} "
+        ">{output.json} "
+        "2>{log}"
+
+
 rule omark:
     input:
         file=Path(workingdir, "proteins.omamer"),

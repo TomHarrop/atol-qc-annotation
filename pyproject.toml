@@ -25,6 +25,7 @@ classifiers = [
 
 [project.scripts]
 atol-qc-annotation = "atol_qc_annotation.__main__:main"
+parse-omark-sum-file = "atol_qc_annotation.parse_omark_sum_file:main"
 
 [project.urls]
 Homepage = "https://github.com/tomharrop/atol-qc-annotation"

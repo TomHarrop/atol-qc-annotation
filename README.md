@@ -9,3 +9,5 @@
 - [ ] Set the resources
 - [ ] Implement Gff to GTF conversion
 - [ ] Test with helixer/funannotate/tiberius output
+- [ ] OMARK: tool and DB version
+- [ ] OMARK: parse whole result/conserv lines

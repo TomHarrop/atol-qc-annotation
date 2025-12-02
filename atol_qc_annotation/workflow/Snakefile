@@ -26,4 +26,4 @@ rule target:
     input:
         rules.agat_sp_statistics.output,
         rules.busco.output,
-        rules.omark.output,
+        rules.parse_omark_sum_file.output,
