@@ -46,6 +46,7 @@ test_braker_gtf:
 	python3 -m cProfile -o "test-output/test_braker_gtf/cProfile.stats" \
 	-m atol_qc_annotation.__main__ \
 		--threads 12 \
+		--dev_container atol-qc-annotation---0.0.3--pyhdfd78af_0.sif \
 		--fasta test-data/genome.fa \
 		--gtf test-data/braker.gtf \
 		--lineage_dataset embryophyta_odb10 \
