@@ -1,15 +1,121 @@
 # atol-qc-annotation
 
+Run standardised QC on genome annotation files in GFF or GTF format. Output can
+be used for the [AToL annotation
+report](https://github.com/TomHarrop/atol-annotation-report).
+
+1. Run AGAT to flag incomplete gene coding models and premature stop codons,
+   fix CDS phases and extract stats.
+2. Run BUSCO on proteins extracted from the annotation.
+3. Run OMArk on proteins extracted from the annotation.
+
+## Installation: Use the [BioContainer](https://quay.io/repository/biocontainers/atol-qc-annotation?tab=tags)
+
+*e.g.* with Apptainer/Singularity:
+
+```bash
+apptainer exec \
+  docker://quay.io/biocontainers/atol-qc-annotation \
+  atol-qc-annotation --help
+```
+
+## Usage
+
+### Input the genome FASTA file and the annotation GTF
+
+The paths to the BUSCO, OMArk and NCBI taxonomy databases are also required.
+
+```
+atol-qc-annotation \
+		--threads 12 \
+		--fasta genomme.fasta \
+		--gtf annotation.gtf \
+		--lineage_dataset eukaryotes_odb10 \
+		--lineages_path path/to/busco/lineages \
+		--db path/to/LUCA.h5 \
+		--taxid 123456 \
+		--ete_ncbi_db path/to/taxa.sqlite \
+		--outdir results \
+		--logs logs 
+```
+
+### Full usage
+
+```
+atol-qc-annotation version 0.0.4.dev3+g4c71cb22f.d20251203
+usage: atol-qc-annotation [-h] [-t THREADS] [-m MEM_GB] [--dev_container DEV_CONTAINER]
+                          [-n] --fasta FASTA [--gtf GTF] --lineage_dataset LINEAGE_DATASET
+                          --lineages_path LINEAGES_PATH --db OMAMER_DB --taxid TAXID
+                          --ete_ncbi_db ETE_NCBI_DB --outdir OUTDIR
+                          [--logs LOGS_DIRECTORY]
+
+options:
+  -h, --help            show this help message and exit
+  -t THREADS, --threads THREADS
+  -m MEM_GB, --mem MEM_GB
+                        Intended maximum RAM in GB.
+  --dev_container DEV_CONTAINER
+                        For development use. Specify a container to run all the jobs in.
+  -n                    Dry run
+
+Input:
+  --fasta FASTA, -f FASTA
+                        Path to the genome assembly FASTA file
+  --gtf GTF             Path to the genome annotation GTF file. NOTE: If you provide a
+                        gff, it will be converted to GTF for analysis.
+
+BUSCO settings:
+  --lineage_dataset LINEAGE_DATASET, -l LINEAGE_DATASET
+                        Specify the name of the BUSCO lineage to be used. Default:
+                        eukaryota_odb10
+  --lineages_path LINEAGES_PATH
+                        Path to the BUSCO lineages directory.
+
+OMArk settings:
+  --db OMAMER_DB        OMAmer database
+  --taxid TAXID         NCBI Taxonomy ID
+  --ete_ncbi_db ETE_NCBI_DB
+                        Path to the ete3 NCBI database to be used.
+
+Output:
+  --outdir OUTDIR       Output directory
+  --logs LOGS_DIRECTORY
+                        Log output directory. Default: logs are discarded.
+```
+
+### Reference data
+
+#### Reference data
+
+- The OMArk `LUCA.h5` database can be downloaded from
+[omabrowser.org](https://omabrowser.org/All/LUCA.h5)
+- The BUSCO databases are from
+  [busco-data.ezlab.org](https://busco-data.ezlab.org/v5/data/lineages/).
+  Expand the tar.gz file and provide the path to the uncompressed directory.
+- `taxa.sqlite` is the NCBI Taxonomy database as downloaded and formatted by
+  the [ETE
+  toolkit](https://etetoolkit.org/docs/latest/tutorial/tutorial_ncbitaxonomy.html).
+  The easiest way to get a local copy is to run the following python3 code:
+
+```python3
+from ete4 import NCBITaxa
+ncbi=NCBITaxa()
+```
+
+downloads to a hard-coded location
+ ~/.local/share/ete/
+
+
 ## TODO
 
-- [ ] Should this be a single monolithic pipeline with a container that has all the dependencies, or a normal pipeline that pulls the containers it needs? The second is more flexible and will perform better but will require profiles etc. to run it on HPC.
+- [x] Should this be a single monolithic pipeline with a container that has all the dependencies, or a normal pipeline that pulls the containers it needs? The second is more flexible and will perform better but will require profiles etc. to run it on HPC.
   - Doesn't actually seem to be possible: https://github.com/snakemake/snakemake/issues/1488. It has to be a single container
-  - [ ] BioConda recipe
+  - [x] BioConda recipe
 - [x] Eliminate the use of temporary directories (use `temp` instead)
 - [ ] Set the resources
-- [ ] Implement Gff to GTF conversion
-- [ ] Test with helixer/funannotate/tiberius output
-- [ ] OMARK: tool and DB version
+- [x] Implement Gff to GTF conversion
+- [x] Test with helixer/funannotate/tiberius output
+- [x] OMARK: tool and DB version
   - for the DB:  
      ```python
     import tables
@@ -18,4 +124,4 @@
     x.get_node_attr("/", "omamer_version")
     ```
 
-- [ ] OMARK: parse whole result/conserv lines
+- [x] OMARK: parse whole result/conserv lines

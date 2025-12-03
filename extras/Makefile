@@ -4,7 +4,7 @@ local_version := $(shell python3 -m setuptools_scm)
 tmpdir := $(shell mktemp -d)
 branch := $(shell git rev-parse --abbrev-ref HEAD)
 RESULTDIR := test-output
-CONTAINER := atol-qc-annotation---0.0.3--pyhdfd78af_0.sif
+CONTAINER := atol-qc-annotation---0.0.4--pyhdfd78af_0.sif
 
 # Discover all GTFs and map them to expected outputs
 GTFS := $(wildcard test-data/rgram/*.gtf)
@@ -12,7 +12,7 @@ GFFS := $(wildcard test-data/rgram/*.gff)
 STEMS := $(patsubst test-data/rgram/%.gtf,%,$(GTFS)) $(patsubst test-data/rgram/%.gff,%,$(GFFS))
 TARGETS := $(addprefix $(RESULTDIR)/rgram/,$(addsuffix /agat.stats.yaml,$(sort $(STEMS))))
 
-.PHONY: all
+.PHONY: rgram
 rgram: $(TARGETS)
 
 dir_guard = @mkdir -p $(@D)
@@ -39,14 +39,14 @@ $(RESULTDIR)/rgram/%/agat.stats.yaml: $$(if $$(wildcard test-data/rgram/$$*.gtf)
 
 # add the following switch to run in the dev container
 # 		--dev_container "atol-qc-annotation---0.0.2--pyhdfd78af_0.sif" \
-# 		--dev_container $(CONTAINER) \
-
+# 		
 
 test_braker_gtf: 
 	$(dir_guard) ;
 	python3 -m cProfile -o "test-output/test_braker_gtf/cProfile.stats" \
 	-m atol_qc_annotation.__main__ \
 		--threads 12 \
+		--dev_container $(CONTAINER) \
 		--fasta test-data/genome.fa \
 		--gtf test-data/braker.gtf \
 		--lineage_dataset embryophyta_odb10 \

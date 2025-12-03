@@ -58,27 +58,33 @@ def parse_sum_file(sum_file):
             if search_result:
                 results_dict[search_result[0]] = search_result[1]
 
-            result_counts = results_line_search(
+            result_counts, match_string = results_line_search(
                 line, int, result_line_regexes["counts"]
             )
             if result_counts:
                 results_dict["results_counts"] = result_counts
+                results_dict["results_counts_raw"] = match_string
 
-            results_pcts = results_line_search(line, float, result_line_regexes["pcts"])
+            results_pcts, match_string = results_line_search(
+                line, float, result_line_regexes["pcts"]
+            )
             if results_pcts:
                 results_dict["results_pcts"] = results_pcts
+                results_dict["results_pcts_raw"] = match_string
 
-            conserv_counts = results_line_search(
+            conserv_counts, match_string = results_line_search(
                 line, int, conserv_line_regexes["counts"]
             )
             if conserv_counts:
                 results_dict["conserv_counts"] = conserv_counts
+                results_dict["conserv_counts_raw"] = match_string
 
-            conserv_pcts = results_line_search(
+            conserv_pcts, match_string = results_line_search(
                 line, float, conserv_line_regexes["pcts"]
             )
             if conserv_pcts:
                 results_dict["conserv_pcts"] = conserv_pcts
+                results_dict["conserv_pcts_raw"] = match_string
 
             # The contaminant section comes directly after this header until
             # the end of the file.
@@ -122,7 +128,9 @@ def results_line_search(line, type_to_return, regex):
         result_dict = {
             k: type_to_return(v) for k, v in search_result.groupdict().items()
         }
-        return result_dict
+        return result_dict, search_result.string
+    else:
+        return None, None
 
 
 def single_line_search(line, single_line_regexes):
