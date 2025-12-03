@@ -8,6 +8,7 @@ report](https://github.com/TomHarrop/atol-annotation-report).
    fix CDS phases and extract stats.
 2. Run BUSCO on proteins extracted from the annotation.
 3. Run OMArk on proteins extracted from the annotation.
+   1. Parse the irregular OMArk summary file into JSON.
 
 ## Installation: Use the [BioContainer](https://quay.io/repository/biocontainers/atol-qc-annotation?tab=tags)
 
@@ -38,6 +39,26 @@ atol-qc-annotation \
 		--outdir results \
 		--logs logs 
 ```
+
+### Reference data
+
+- The OMArk `LUCA.h5` database can be downloaded from
+[omabrowser.org](https://omabrowser.org/All/LUCA.h5)
+- The BUSCO databases are from
+  [busco-data.ezlab.org](https://busco-data.ezlab.org/v5/data/lineages/).
+  Expand the tar.gz file and provide the path to the uncompressed directory.
+- `taxa.sqlite` is the NCBI Taxonomy database as downloaded and formatted by
+  the [ETE
+  toolkit](https://etetoolkit.org/docs/latest/tutorial/tutorial_ncbitaxonomy.html).
+  The easiest way to get a local copy is to run the following python3 code:  
+  ```python3
+  from ete4 import NCBITaxa
+  ncbi=NCBITaxa()
+  ```  
+  This places the `taxa.sqlite` file in a hard-coded location
+  (`~/.local/share/ete/` on Ubuntu). Move it from there to your shared data
+  location.
+
 
 ### Full usage
 
@@ -82,29 +103,6 @@ Output:
   --logs LOGS_DIRECTORY
                         Log output directory. Default: logs are discarded.
 ```
-
-### Reference data
-
-#### Reference data
-
-- The OMArk `LUCA.h5` database can be downloaded from
-[omabrowser.org](https://omabrowser.org/All/LUCA.h5)
-- The BUSCO databases are from
-  [busco-data.ezlab.org](https://busco-data.ezlab.org/v5/data/lineages/).
-  Expand the tar.gz file and provide the path to the uncompressed directory.
-- `taxa.sqlite` is the NCBI Taxonomy database as downloaded and formatted by
-  the [ETE
-  toolkit](https://etetoolkit.org/docs/latest/tutorial/tutorial_ncbitaxonomy.html).
-  The easiest way to get a local copy is to run the following python3 code:
-
-```python3
-from ete4 import NCBITaxa
-ncbi=NCBITaxa()
-```
-
-downloads to a hard-coded location
- ~/.local/share/ete/
-
 
 ## TODO
 
