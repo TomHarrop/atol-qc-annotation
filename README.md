@@ -10,7 +10,11 @@ report](https://github.com/TomHarrop/atol-annotation-report).
 3. Run OMArk on proteins extracted from the annotation.
    1. Parse the irregular OMArk summary file into JSON.
 
-## Installation: Use the [BioContainer](https://quay.io/repository/biocontainers/atol-qc-annotation?tab=tags)
+## Installation
+
+The
+[BioContainer](https://quay.io/repository/biocontainers/atol-qc-annotation?tab=tags)
+is the only supported method of running `atol-qc-annotation`.
 
 *e.g.* with Apptainer/Singularity:
 
@@ -19,6 +23,7 @@ apptainer exec \
   docker://quay.io/biocontainers/atol-qc-annotation \
   atol-qc-annotation --help
 ```
+
 
 ## Usage
 
