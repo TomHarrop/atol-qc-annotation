@@ -39,6 +39,7 @@ $(RESULTDIR)/rgram/%/agat.stats.yaml: $$(if $$(wildcard test-data/rgram/$$*.gtf)
 
 # add the following switch to run in the dev container
 # 		--dev_container "atol-qc-annotation---0.0.2--pyhdfd78af_0.sif" \
+# 		--dev_container $(CONTAINER) \
 
 
 test_braker_gtf: 
@@ -46,7 +47,6 @@ test_braker_gtf:
 	python3 -m cProfile -o "test-output/test_braker_gtf/cProfile.stats" \
 	-m atol_qc_annotation.__main__ \
 		--threads 12 \
-		--dev_container $(CONTAINER) \
 		--fasta test-data/genome.fa \
 		--gtf test-data/braker.gtf \
 		--lineage_dataset embryophyta_odb10 \

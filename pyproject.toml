@@ -3,7 +3,7 @@ requires = ["setuptools>=42", "wheel", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-dependencies = ["snakemake>=9.11.6,<10", "pandas>=2.3.3,<3"]
+dependencies = ["snakemake>=9.11.6,<10", "tables>=3.10.2"]
 name = "atol-qc-annotation"
 dynamic = ["version"]
 description = "python3 wrapper for AToL annotation QC steps"

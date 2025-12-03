@@ -11,7 +11,7 @@
 - [ ] Test with helixer/funannotate/tiberius output
 - [ ] OMARK: tool and DB version
   - for the DB:  
-    ```python
+     ```python
     import tables
     db="test-data/omark/LUCA.h5"
     x=tables.open_file(db, mode='r')
