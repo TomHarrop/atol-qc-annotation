@@ -6,10 +6,15 @@ rule check_protein_fasta_file:
         proteins=Path(workingdir, "proteins.faa"),
     output:
         proteins=Path(outdir, "proteins.faa"),
+    params:
+        mem_mb=lambda wildcards, resources: int(resources.mem_mb * 0.9),
     log:
         Path(logs_directory, "check_protein_fasta_file.log"),
+    resources:
+        mem="2GB",
     shell:
         "reformat.sh "
+        "-Xmx{params.mem_mb}m "
         "fixheaders=t "
         "trimreaddescription=t "
         "ignorejunk=t "
@@ -27,7 +32,7 @@ rule extract_proteins:
     log:
         Path(logs_directory, "extract_proteins.log"),
     benchmark:
-        Path(logs_directory, "extract_proteins.stats"),
+        Path(logs_directory, "extract_proteins.stats")
     shadow:
         "minimal"
     shell:

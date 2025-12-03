@@ -45,6 +45,8 @@ rule omark:
         Path(logs_directory, "omark.log"),
     benchmark:
         Path(logs_directory, "omark.stats")
+    resources:
+        mem="4GB",
     shell:
         "omark  "
         "--file {input.file} "
@@ -66,6 +68,8 @@ rule omamer_search:
     benchmark:
         Path(logs_directory, "omamer_search.stats")
     threads: int(workflow.cores - 1)
+    resources:
+        mem="24GB",
     shell:
         "omamer search "
         "--db {input.db} "

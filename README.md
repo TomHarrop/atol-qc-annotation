@@ -68,7 +68,6 @@ atol-qc-annotation \
 ### Full usage
 
 ```
-atol-qc-annotation version 0.0.4.dev3+g4c71cb22f.d20251203
 usage: atol-qc-annotation [-h] [-t THREADS] [-m MEM_GB] [--dev_container DEV_CONTAINER]
                           [-n] --fasta FASTA [--gtf GTF] --lineage_dataset LINEAGE_DATASET
                           --lineages_path LINEAGES_PATH --db OMAMER_DB --taxid TAXID

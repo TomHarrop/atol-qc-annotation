@@ -4,7 +4,7 @@ local_version := $(shell python3 -m setuptools_scm)
 tmpdir := $(shell mktemp -d)
 branch := $(shell git rev-parse --abbrev-ref HEAD)
 RESULTDIR := test-output
-CONTAINER := atol-qc-annotation---0.0.4--pyhdfd78af_0.sif
+CONTAINER := atol-qc-annotation---0.0.5--pyhdfd78af_0.sif
 
 # Discover all GTFs and map them to expected outputs
 GTFS := $(wildcard test-data/rgram/*.gtf)
