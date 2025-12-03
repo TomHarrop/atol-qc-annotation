@@ -56,3 +56,17 @@ test_braker_gtf:
 		--ete_ncbi_db test-data/omark/ete/taxa.sqlite \
 		--outdir test-output/test_braker_gtf \
 		--logs test-output/test_braker_gtf/logs 
+
+
+changelog: CHANGELOG.md
+
+CHANGELOG.md: .git/index
+	gitchangelog > $(tmpdir)/CHANGELOG.md
+	apptainer exec docker://davidanson/markdownlint-cli2:v0.13.0 \
+	markdownlint-cli2 \
+	--fix \
+	:$(tmpdir)/CHANGELOG.md || true
+	mv $(tmpdir)/CHANGELOG.md ./CHANGELOG.md
+	git add CHANGELOG.md
+	git commit -m 'changelog !cosmetic'
+	git push origin $(branch)
