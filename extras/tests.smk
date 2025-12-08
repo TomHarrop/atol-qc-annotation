@@ -5,20 +5,21 @@
 
 my_container = "docker://quay.io/biocontainers/atol-qc-annotation:0.1.0--pyhdfd78af_0"
 
-pipelines = ["funannotate", "braker3", "tiberius"]
+pipelines = ["braker"]  # TODO: add more tests
 
-genome = "test-data/rgram/R_gram.fasta"
-annot_glob = "test-data/rgram/{pipeline}.{annot_ext}"
+genome = "test-data/genome.fa"
+annot_glob = "test-data/{pipeline}.{annot_ext}"
 
-outdir = "test-output/rgram/{run_type}/{pipeline}"
+outdir = "test-output/{run_type}/{pipeline}"
 
+lineage = "embryophyta_odb10"
+taxid = 3702
 
-lineage="helotiales_odb10"
-taxid=2792576
 
 include: "test_rules.smk"
 
-rule rgram_target:
+
+rule tests_target:
     default_target: True
     input:
         rules.test_biocontainer.input,
