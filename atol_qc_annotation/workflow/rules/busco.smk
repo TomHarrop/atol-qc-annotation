@@ -1,15 +1,35 @@
 #!/usr/bin/env python3
 
 
+rule collect_busco_output:
+    input:
+        json=Path(
+            outdir, "busco", f"short_summary.specific.{lineage_dataset}.busco.json"
+        ),
+        txt=Path(outdir, "busco", f"short_summary.specific.{lineage_dataset}.busco.txt"),
+    output:
+        json=Path(outdir, "short_summary.specific.busco.json"),
+        txt=Path(outdir, "short_summary.specific.busco.txt"),
+    shell:
+        "cp {input.json} {output.json} && "
+        "cp {input.txt} {output.txt}"
+
+
 rule busco:
     input:
         proteins=Path(outdir, "proteins.faa"),
         busco_db=Path(lineages_path, lineage_dataset),
     output:
-        json=Path(
-            outdir, "busco", f"short_summary.specific.{lineage_dataset}.busco.json"
+        json=temp(
+            Path(
+                outdir, "busco", f"short_summary.specific.{lineage_dataset}.busco.json"
+            )
         ),
-        txt=Path(outdir, "busco", f"short_summary.specific.{lineage_dataset}.busco.txt"),
+        txt=temp(
+            Path(
+                outdir, "busco", f"short_summary.specific.{lineage_dataset}.busco.txt"
+            )
+        ),
     params:
         outdir=subpath(output.json, parent=True),
     log:

@@ -159,14 +159,6 @@ def main():
     args = parse_arguments()
     logger.debug(f"Entrypoint args:\n    {args}")
 
-    # decide if we're using the container config
-    container_config = Path(package_path, "config", "containers.yaml")
-    if container_config.is_file():
-        logger.debug(f"Using container_config {container_config}")
-        configfiles = [container_config]
-    else:
-        raise FileNotFoundError("Could not find container_config")
-
     # set up a working directory for this run
     workingdir = Path(args.outdir, "tmp").as_posix()
     args.workingdir = workingdir
@@ -195,7 +187,7 @@ def main():
     dag_settings = DAGSettings(rerun_triggers={RerunTrigger.INPUT})
 
     # other settings
-    config_settings = ConfigSettings(config=args.__dict__, configfiles=configfiles)
+    config_settings = ConfigSettings(config=args.__dict__)
     execution_settings = ExecutionSettings(lock=False)
     storage_settings = StorageSettings(notemp=True)
 

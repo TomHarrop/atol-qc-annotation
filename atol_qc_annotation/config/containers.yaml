@@ -1,6 +1,0 @@
-containers:
-  agat: "docker://quay.io/biocontainers/agat:1.5.1--pl5321hdfd78af_0"
-  bbmap: "docker://quay.io/biocontainers/bbmap:39.52--he5f24ec_0"
-  busco: "docker://quay.io/biocontainers/busco:5.8.3--pyhdfd78af_1"
-  gffread: "docker://quay.io/biocontainers/gffread:0.12.7--h077b44d_6"
-  omark: "docker://quay.io/biocontainers/omark:0.3.1--pyh7e72e81_1"
