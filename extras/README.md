@@ -1,0 +1,1 @@
+Run `tests.smk` to test the pipeline using the data described in [test-data/README.md](../test-data/README.md).
