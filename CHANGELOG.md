@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2 (2025-12-10)
+
+### Other
+
+* Rerun reformat.sh with more memory if needed.
+
 ## 0.1.1 (2025-12-08)
 
 ### New
