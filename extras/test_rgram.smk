@@ -3,7 +3,7 @@
 
 # GLOBALS
 
-my_container = "docker://quay.io/biocontainers/atol-qc-annotation:0.1.0--pyhdfd78af_0"
+my_container = "docker://quay.io/biocontainers/atol-qc-annotation:0.1.2--pyhdfd78af_0"
 
 pipelines = ["funannotate", "braker3", "tiberius"]
 
@@ -13,10 +13,12 @@ annot_glob = "test-data/rgram/{pipeline}.{annot_ext}"
 outdir = "test-output/rgram/{run_type}/{pipeline}"
 
 
-lineage="helotiales_odb10"
-taxid=2792576
+lineage = "helotiales_odb10"
+taxid = 2792576
+
 
 include: "test_rules.smk"
+
 
 rule rgram_target:
     default_target: True

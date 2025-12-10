@@ -69,7 +69,7 @@ rule omamer_search:
         Path(logs_directory, "omamer_search.stats")
     threads: int(workflow.cores - 1)
     resources:
-        mem="24GB",
+        mem="16GB",
     shell:
         "omamer search "
         "--db {input.db} "

@@ -189,7 +189,7 @@ def main():
     # other settings
     config_settings = ConfigSettings(config=args.__dict__)
     execution_settings = ExecutionSettings(lock=False)
-    storage_settings = StorageSettings(notemp=True)
+    storage_settings = StorageSettings(notemp=True if args.dev_container else False)
 
     # use apptainer if there is a dev container
     deployment_method = [DeploymentMethod.APPTAINER] if args.dev_container else []

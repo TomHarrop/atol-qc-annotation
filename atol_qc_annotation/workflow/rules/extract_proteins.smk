@@ -7,14 +7,16 @@ rule check_protein_fasta_file:
     output:
         proteins=Path(outdir, "proteins.faa"),
     params:
-        mem_mb=lambda wildcards, resources: int(resources.mem_mb * 0.9),
+        mem_pct=95,  # amount to assign to java
     log:
         Path(logs_directory, "check_protein_fasta_file.log"),
+    retries: 5
     resources:
-        mem="2GB",
+        mem=lambda wildcards, attempt: f"{int(2** attempt)}GB",
     shell:
+        "mem_mb=$(( {resources.mem_mb} * {params.mem_pct} / 100 )) ; "
         "reformat.sh "
-        "-Xmx{params.mem_mb}m "
+        "-Xmx${{mem_mb}}m "
         "fixheaders=t "
         "trimreaddescription=t "
         "ignorejunk=t "

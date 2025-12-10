@@ -38,7 +38,7 @@ rule busco:
         Path(logs_directory, "busco.stats")
     threads: int(workflow.cores - 1)
     resources:
-        mem="32GB",
+        mem="24GB",
     shadow:
         "minimal"
     shell:
