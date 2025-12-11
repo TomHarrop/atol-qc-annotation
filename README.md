@@ -60,7 +60,7 @@ atol-qc-annotation \
   from ete4 import NCBITaxa
   ncbi=NCBITaxa()
   ```  
-  This places the `taxa.sqlite` file in a hard-coded location
+  This places the `taxa.sqlite` file in a default location
   (`~/.local/share/ete/` on Ubuntu). Move it from there to your shared data
   location.
 
