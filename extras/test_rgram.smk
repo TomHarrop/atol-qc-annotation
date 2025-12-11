@@ -5,7 +5,7 @@
 
 my_container = "docker://quay.io/biocontainers/atol-qc-annotation:0.1.2--pyhdfd78af_0"
 
-pipelines = ["funannotate", "braker3", "tiberius"]
+pipelines = ["braker3", "funannotate", "helixer", "tiberius"]
 
 genome = "test-data/rgram/R_gram.fasta"
 annot_glob = "test-data/rgram/{pipeline}.{annot_ext}"

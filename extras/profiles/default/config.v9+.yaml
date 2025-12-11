@@ -9,3 +9,4 @@ singularity-args: "\
   --containall --cleanenv --writable-tmpfs"
 use-singularity: true
 use-conda: False
+cores: 12

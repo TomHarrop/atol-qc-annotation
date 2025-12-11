@@ -1,13 +1,23 @@
 #!/usr/bin/env python3
 
 
-rule collect_gtf:
+rule agat_convert_sp_gff2gtf:
     input:
-        gtf,
+        gtf=gtf,
     output:
-        temp(Path(workingdir, "input.gtf")),
+        gtf=temp(Path(workingdir, "input.gtf")),
+    log:
+        Path(logs_directory, "agat_convert_sp_gff2gtf.log"),
+    benchmark:
+        Path(logs_directory, "agat_convert_sp_gff2gtf.stats")
+    shadow:
+        "minimal"
     shell:
-        "cp {input} {output}"
+        "agat_convert_sp_gff2gtf.pl "
+        "-i {input.gtf} "
+        "--gtf_version 3 "
+        "--output {output.gtf} "
+        "&> {log} "
 
 
 rule collect_genome_fasta_file:

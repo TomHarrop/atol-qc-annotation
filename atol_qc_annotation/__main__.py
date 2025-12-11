@@ -51,13 +51,13 @@ def parse_arguments():
         "--fasta",
         "-f",
         required=True,
-        type=Path,
+        type=posixpath,
         help="Path to the genome assembly FASTA file",
         dest="fasta",
     )
     input_group.add_argument(
         "--gtf",
-        type=Path,
+        type=posixpath,
         help=(
             "Path to the genome annotation GTF file. "
             "NOTE: If you provide a gff, it will be converted to GTF for analysis."

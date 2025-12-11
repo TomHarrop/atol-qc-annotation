@@ -5,7 +5,7 @@
 
 my_container = "docker://quay.io/biocontainers/atol-qc-annotation:0.1.2--pyhdfd78af_0"
 
-pipelines = ["braker"]  # TODO: add more tests
+pipelines = ["braker", "funannotate", "helixer"]  # TODO: add more tests
 
 genome = "test-data/genome.fa"
 annot_glob = "test-data/{pipeline}.{annot_ext}"
