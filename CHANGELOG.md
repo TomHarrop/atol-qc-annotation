@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.3 (2025-12-11)
+
+### New
+
+* Convert the input annotation to AGAT GTF before running stats.
+
+### Other
+
+* Tidy result files.
+
+* Tidy result files.
+
+* Include test output.
+
 ## 0.1.2 (2025-12-10)
 
 ### Other
