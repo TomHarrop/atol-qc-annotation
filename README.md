@@ -65,6 +65,10 @@ atol-qc-annotation \
   location.
 
 
+### Output
+
+For sample output, see the [results](./results/) directory.
+
 ### Full usage
 
 ```
