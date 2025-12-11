@@ -1,0 +1,19 @@
+# BUSCO version is: 5.8.3 
+# The lineage dataset is: embryophyta_odb10 (Creation date: 2024-01-08, number of genomes: 50, number of BUSCOs: 1614)
+# Summarized benchmarking in BUSCO notation for file /home/tharrop/Projects/atol-qc-annotation/.snakemake/shadow/tmp9rp1syb3/test-output/biocontainer/braker/proteins.faa
+# BUSCO was run in mode: proteins
+
+	***** Results: *****
+
+	C:1.1%[S:1.0%,D:0.1%],F:0.2%,M:98.7%,n:1614	   
+	18	Complete BUSCOs (C)			   
+	16	Complete and single-copy BUSCOs (S)	   
+	2	Complete and duplicated BUSCOs (D)	   
+	3	Fragmented BUSCOs (F)			   
+	1593	Missing BUSCOs (M)			   
+	1614	Total BUSCO groups searched		   
+
+Dependencies and versions:
+	hmmsearch: 3.4
+	python: sys.version_info(major=3, minor=12, micro=12, releaselevel='final', serial=0)
+	busco: 5.8.3
