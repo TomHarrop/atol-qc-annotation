@@ -115,23 +115,3 @@ Output:
   --logs LOGS_DIRECTORY
                         Log output directory. (default: None)
 ```
-
-## TODO
-
-- [x] Should this be a single monolithic pipeline with a container that has all the dependencies, or a normal pipeline that pulls the containers it needs? The second is more flexible and will perform better but will require profiles etc. to run it on HPC.
-  - Doesn't actually seem to be possible: https://github.com/snakemake/snakemake/issues/1488. It has to be a single container
-  - [x] BioConda recipe
-- [x] Eliminate the use of temporary directories (use `temp` instead)
-- [ ] Set the resources
-- [x] Implement Gff to GTF conversion
-- [x] Test with helixer/funannotate/tiberius output
-- [x] OMARK: tool and DB version
-  - for the DB:  
-     ```python
-    import tables
-    db="test-data/omark/LUCA.h5"
-    x=tables.open_file(db, mode='r')
-    x.get_node_attr("/", "omamer_version")
-    ```
-
-- [x] OMARK: parse whole result/conserv lines
