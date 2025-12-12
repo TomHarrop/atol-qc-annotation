@@ -79,15 +79,15 @@ For sample output, see the [results](./results/) directory.
 ### Full usage
 
 ```
-usage: atol-qc-annotation [-h] [-t THREADS] [--mem MEM_GB] [-n] --fasta FASTA --annot
-                          ANNOT_FILE [--lineage_dataset LINEAGE_DATASET]
+usage: atol-qc-annotation [-h] [--threads THREADS] [--mem MEM_GB] [-n] --fasta FASTA
+                          --annot ANNOT_FILE [--lineage_dataset LINEAGE_DATASET]
                           --lineages_path LINEAGES_PATH --db OMAMER_DB --taxid TAXID
                           --ete_ncbi_db ETE_NCBI_DB --outdir OUTDIR
                           [--logs LOGS_DIRECTORY]
 
 options:
   -h, --help            show this help message and exit
-  -t THREADS, --threads THREADS
+  --threads THREADS
   --mem MEM_GB          Intended maximum RAM in GB. (default: 32)
   -n                    Dry run (default: False)
 
