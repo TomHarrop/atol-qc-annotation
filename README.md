@@ -43,7 +43,7 @@ atol-qc-annotation \
 		--threads 12 \
 		--fasta genomme.fasta \
 		--annot annotation.gtf \
-		--lineage_dataset eukaryotes_odb10 \
+		--lineage_dataset eukaryota_odb10 \
 		--lineages_path path/to/busco/lineages \
 		--db path/to/LUCA.h5 \
 		--taxid 123456 \
@@ -79,9 +79,8 @@ For sample output, see the [results](./results/) directory.
 ### Full usage
 
 ```
-usage: atol-qc-annotation [-h] [-t THREADS] [-m MEM_GB]
-                          [--dev_container DEV_CONTAINER] [-n] --fasta FASTA
-                          [--annot ANNOT_FILE] --lineage_dataset LINEAGE_DATASET
+usage: atol-qc-annotation [-h] [-t THREADS] [-m MEM_GB] [-n] --fasta FASTA --annot
+                          ANNOT_FILE [--lineage_dataset LINEAGE_DATASET]
                           --lineages_path LINEAGES_PATH --db OMAMER_DB --taxid TAXID
                           --ete_ncbi_db ETE_NCBI_DB --outdir OUTDIR
                           [--logs LOGS_DIRECTORY]
@@ -90,35 +89,33 @@ options:
   -h, --help            show this help message and exit
   -t THREADS, --threads THREADS
   -m MEM_GB, --mem MEM_GB
-                        Intended maximum RAM in GB.
-  --dev_container DEV_CONTAINER
-                        For development use. Specify a container to run all the jobs
-                        in.
-  -n                    Dry run
+                        Intended maximum RAM in GB. (default: 32)
+  -n                    Dry run (default: False)
 
 Input:
   --fasta FASTA, -f FASTA
-                        Path to the genome assembly FASTA file
+                        Path to the genome assembly FASTA file. (default: None)
   --annot ANNOT_FILE    Path to the genome annotation file. Any annotation format
-                        recognised by agat_sp_extract_sequences works.
+                        recognised by agat_sp_extract_sequences works. (default:
+                        None)
 
 BUSCO settings:
   --lineage_dataset LINEAGE_DATASET, -l LINEAGE_DATASET
-                        Specify the name of the BUSCO lineage to be used. Default:
-                        eukaryota_odb10
+                        Name of the BUSCO lineage. (default: eukaryota_odb10)
   --lineages_path LINEAGES_PATH
-                        Path to the BUSCO lineages directory.
+                        Path to the BUSCO lineages directory. (default: None)
 
 OMArk settings:
-  --db OMAMER_DB        OMAmer database
-  --taxid TAXID         NCBI Taxonomy ID
+  --db OMAMER_DB        Path to OMAmer database. (default: None)
+  --taxid TAXID         NCBI Taxonomy ID. (default: None)
   --ete_ncbi_db ETE_NCBI_DB
-                        Path to the ete3 NCBI database to be used.
+                        Path to the ete3-formatted NCBI Taxonomy database. (default:
+                        None)
 
 Output:
-  --outdir OUTDIR       Output directory
+  --outdir OUTDIR       Output directory. (default: None)
   --logs LOGS_DIRECTORY
-                        Log output directory. Default: logs are discarded.
+                        Log output directory. (default: None)
 ```
 
 ## TODO
