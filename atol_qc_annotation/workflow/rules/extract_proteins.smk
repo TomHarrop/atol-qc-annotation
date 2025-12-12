@@ -27,7 +27,7 @@ rule check_protein_fasta_file:
 
 rule extract_proteins:
     input:
-        gff=Path(outdir, "agat.fix_cds_phases.gff"),
+        annot_file=annot_file,
         genome=Path(workingdir, "genome.fasta"),
     output:
         proteins=temp(Path(workingdir, "proteins.faa")),
@@ -39,7 +39,7 @@ rule extract_proteins:
         "minimal"
     shell:
         "agat_sp_extract_sequences.pl "
-        "--gff {input.gff} "
+        "--gff {input.annot_file} "
         "--fasta {input.genome} "
         "--protein "
         "--output {output.proteins} "

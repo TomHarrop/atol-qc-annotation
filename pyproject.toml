@@ -35,9 +35,7 @@ packages = ["atol_qc_annotation"]
 
 [tool.setuptools.package-data]
 atol_qc_annotation = [
-    "workflow/rules/agat.smk",
     "workflow/rules/busco.smk",
-    "workflow/rules/convert_gff_to_gtf.smk",
     "workflow/rules/extract_proteins.smk",
     "workflow/rules/omark.smk",
     "workflow/rules/utils.smk",
@@ -45,6 +43,6 @@ atol_qc_annotation = [
 ]
 
 [tool.setuptools.exclude-package-data]
-"*" = ["extras/*"]
+"*" = ["extras/*", "results/*"]
 
 [tool.setuptools_scm]

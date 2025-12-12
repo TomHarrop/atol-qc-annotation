@@ -56,13 +56,13 @@ def parse_arguments():
         dest="fasta",
     )
     input_group.add_argument(
-        "--gtf",
+        "--annot",
         type=posixpath,
         help=(
-            "Path to the genome annotation GTF file. "
-            "NOTE: If you provide a gff, it will be converted to GTF for analysis."
+            "Path to the genome annotation file. "
+            "Any annotation format recognised by agat_sp_extract_sequences works."
         ),
-        dest="gtf",
+        dest="annot_file",
     )
 
     # tool settings

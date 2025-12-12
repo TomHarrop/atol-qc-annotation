@@ -15,7 +15,6 @@ if dev_container:
     container: dev_container
 
 
-include: "rules/agat.smk"
 include: "rules/busco.smk"
 include: "rules/extract_proteins.smk"
 include: "rules/utils.smk"
@@ -25,6 +24,5 @@ include: "rules/omark.smk"
 rule target:
     default_target: True
     input:
-        rules.agat_sp_statistics.output,
         rules.collect_busco_output.output,
         rules.parse_omark_sum_file.output,

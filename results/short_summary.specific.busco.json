@@ -1,11 +1,11 @@
 {
     "parameters": {
-        "out_path": "/home/tharrop/Projects/atol-qc-annotation/.snakemake/shadow/tmpwrcug8p9",
+        "out_path": "/home/tharrop/Projects/atol-qc-annotation/.snakemake/shadow/tmp8q5v0ped",
         "cpu": "11",
         "force": "True",
         "restart": "False",
         "quiet": "False",
-        "download_path": "/home/tharrop/Projects/atol-qc-annotation/.snakemake/shadow/tmpwrcug8p9/busco_downloads",
+        "download_path": "/home/tharrop/Projects/atol-qc-annotation/.snakemake/shadow/tmp8q5v0ped/busco_downloads",
         "datasets_version": "odb10",
         "offline": "True",
         "download_base_url": "https://busco-data.ezlab.org/v5/data/",
@@ -19,7 +19,7 @@
         "batch_mode": "False",
         "tar": "False",
         "opt-out-run-stats": "False",
-        "in": "/home/tharrop/Projects/atol-qc-annotation/.snakemake/shadow/tmpwrcug8p9/test-output/dev/braker/proteins.faa",
+        "in": "/home/tharrop/Projects/atol-qc-annotation/.snakemake/shadow/tmp8q5v0ped/test-output/dev/braker/proteins.faa",
         "out": "test-output/dev/braker/busco",
         "mode": "proteins",
         "lineage_dataset": "test-data/busco/lineages/embryophyta_odb10",

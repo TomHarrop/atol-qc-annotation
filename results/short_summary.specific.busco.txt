@@ -1,6 +1,6 @@
 # BUSCO version is: 5.8.3 
 # The lineage dataset is: embryophyta_odb10 (Creation date: 2024-01-08, number of genomes: 50, number of BUSCOs: 1614)
-# Summarized benchmarking in BUSCO notation for file /home/tharrop/Projects/atol-qc-annotation/.snakemake/shadow/tmpwrcug8p9/test-output/dev/braker/proteins.faa
+# Summarized benchmarking in BUSCO notation for file /home/tharrop/Projects/atol-qc-annotation/.snakemake/shadow/tmp8q5v0ped/test-output/dev/braker/proteins.faa
 # BUSCO was run in mode: proteins
 
 	***** Results: *****

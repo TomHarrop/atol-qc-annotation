@@ -22,9 +22,6 @@ def get_annot_file(wildcards):
 
 
 filenames = [
-    "agat.fix_cds_phases.gff",
-    "agat.stats.yaml",
-    "agat.stats",
     "omark_summary.json",
     "proteins.faa",
     "short_summary.specific.busco.json",
@@ -32,7 +29,10 @@ filenames = [
 ]
 
 annot_exts = ["gtf", "gff", "gff3"]
-run_types = ["dev", "biocontainer"] # add "local" to test against locally installed deps
+run_types = [
+    "dev",
+    "biocontainer",
+]  # add "local" to test against locally installed deps
 
 # MAIN
 
@@ -54,7 +54,7 @@ wildcard_constraints:
 rule atol_qc_annotation:
     input:
         fasta=genome,
-        annot_file=get_annot_file,
+        annot=get_annot_file,
         omark_db="test-data/omark/LUCA.h5",
         taxdb="test-data/omark/ete/taxa.sqlite",
     output:
@@ -76,7 +76,7 @@ rule atol_qc_annotation:
         "--threads {threads} "
         "{params.dev_container} "
         "--fasta {input.fasta} "
-        "--gtf {input.annot_file} "
+        "--annot {input.annot} "
         "--lineage_dataset {params.lineage} "
         "--lineages_path {params.lineages_path} "
         "--db {input.omark_db} "
