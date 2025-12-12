@@ -30,7 +30,6 @@ def parse_arguments():
     parser.add_argument("-t", "--threads", type=int, default=16, dest="threads")
 
     parser.add_argument(
-        "-m",
         "--mem",
         help="Intended maximum RAM in GB.",
         type=int,
@@ -52,7 +51,6 @@ def parse_arguments():
     input_group = parser.add_argument_group("Input")
     input_group.add_argument(
         "--fasta",
-        "-f",
         required=True,
         type=posixpath,
         help="Path to the genome assembly FASTA file.",
@@ -75,7 +73,6 @@ def parse_arguments():
 
     busco_group.add_argument(
         "--lineage_dataset",
-        "-l",
         default="eukaryota_odb10",
         type=str,
         help="Name of the BUSCO lineage.",

@@ -79,7 +79,7 @@ For sample output, see the [results](./results/) directory.
 ### Full usage
 
 ```
-usage: atol-qc-annotation [-h] [-t THREADS] [-m MEM_GB] [-n] --fasta FASTA --annot
+usage: atol-qc-annotation [-h] [-t THREADS] [--mem MEM_GB] [-n] --fasta FASTA --annot
                           ANNOT_FILE [--lineage_dataset LINEAGE_DATASET]
                           --lineages_path LINEAGES_PATH --db OMAMER_DB --taxid TAXID
                           --ete_ncbi_db ETE_NCBI_DB --outdir OUTDIR
@@ -88,19 +88,17 @@ usage: atol-qc-annotation [-h] [-t THREADS] [-m MEM_GB] [-n] --fasta FASTA --ann
 options:
   -h, --help            show this help message and exit
   -t THREADS, --threads THREADS
-  -m MEM_GB, --mem MEM_GB
-                        Intended maximum RAM in GB. (default: 32)
+  --mem MEM_GB          Intended maximum RAM in GB. (default: 32)
   -n                    Dry run (default: False)
 
 Input:
-  --fasta FASTA, -f FASTA
-                        Path to the genome assembly FASTA file. (default: None)
+  --fasta FASTA         Path to the genome assembly FASTA file. (default: None)
   --annot ANNOT_FILE    Path to the genome annotation file. Any annotation format
                         recognised by agat_sp_extract_sequences works. (default:
                         None)
 
 BUSCO settings:
-  --lineage_dataset LINEAGE_DATASET, -l LINEAGE_DATASET
+  --lineage_dataset LINEAGE_DATASET
                         Name of the BUSCO lineage. (default: eukaryota_odb10)
   --lineages_path LINEAGES_PATH
                         Path to the BUSCO lineages directory. (default: None)
