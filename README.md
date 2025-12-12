@@ -14,8 +14,8 @@ report](https://github.com/TomHarrop/atol-annotation-report).
 > [!TIP]  
 > For annotation statistics, run
 > [AnnoOddities](https://github.com/EI-CoreBioinformatics/annooddities).
-> AnnoOddities outputs a standardised GFF called `*.output.AnnoOddities.gff`,
-> which can be used as input to `atol-qc-annotation`.
+> AnnoOddities outputs a standardised GFF called `*.AnnoOddities.gff`, which
+> can be used as input to `atol-qc-annotation`.
 
 ## Installation
 

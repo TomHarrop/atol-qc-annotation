@@ -22,7 +22,9 @@ from snakemake.settings.types import DeploymentMethod
 
 
 def parse_arguments():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
 
     # options
     parser.add_argument("-t", "--threads", type=int, default=16, dest="threads")
@@ -36,9 +38,10 @@ def parse_arguments():
         dest="mem_gb",
     )
 
+    # For development use. Specify a container to run all the jobs in
     parser.add_argument(
         "--dev_container",
-        help="For development use. Specify a container to run all the jobs in.",
+        help=argparse.SUPPRESS,
         type=str,
         dest="dev_container",
     )
@@ -52,15 +55,17 @@ def parse_arguments():
         "-f",
         required=True,
         type=posixpath,
-        help="Path to the genome assembly FASTA file",
+        help="Path to the genome assembly FASTA file.",
         dest="fasta",
     )
     input_group.add_argument(
         "--annot",
+        required=True,
         type=posixpath,
         help=(
             "Path to the genome annotation file. "
-            "Any annotation format recognised by agat_sp_extract_sequences works."
+            "Any annotation format recognised by "
+            "agat_sp_extract_sequences works."
         ),
         dest="annot_file",
     )
@@ -71,10 +76,9 @@ def parse_arguments():
     busco_group.add_argument(
         "--lineage_dataset",
         "-l",
-        required=True,
         default="eukaryota_odb10",
         type=str,
-        help="Specify the name of the BUSCO lineage to be used. Default: eukaryota_odb10",
+        help="Name of the BUSCO lineage.",
         dest="lineage_dataset",
     )
 
@@ -90,14 +94,14 @@ def parse_arguments():
     omark_group.add_argument(
         "--db",
         type=posixpath,
-        help="OMAmer database",
+        help="Path to OMAmer database.",
         required=True,
         dest="omamer_db",
     )
     omark_group.add_argument(
         "--taxid",
         type=int,
-        help="NCBI Taxonomy ID",
+        help="NCBI Taxonomy ID.",
         required=True,
         dest="taxid",
     )
@@ -105,7 +109,7 @@ def parse_arguments():
     omark_group.add_argument(
         "--ete_ncbi_db",
         type=posixpath,
-        help="Path to the ete3 NCBI database to be used.",
+        help="Path to the ete3-formatted NCBI Taxonomy database.",
         required=True,
         dest="ete_ncbi_db",
     )
@@ -117,7 +121,7 @@ def parse_arguments():
         "--outdir",
         required=True,
         type=posixpath,
-        help="Output directory",
+        help="Output directory.",
         dest="outdir",
     )
 
@@ -125,7 +129,7 @@ def parse_arguments():
         "--logs",
         required=False,
         type=posixpath,
-        help="Log output directory. Default: logs are discarded.",
+        help="Log output directory.",
         dest="logs_directory",
     )
 
