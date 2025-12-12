@@ -27,7 +27,7 @@ def parse_arguments():
     )
 
     # options
-    parser.add_argument("-t", "--threads", type=int, default=16, dest="threads")
+    parser.add_argument("--threads", type=int, default=16, dest="threads")
 
     parser.add_argument(
         "--mem",
