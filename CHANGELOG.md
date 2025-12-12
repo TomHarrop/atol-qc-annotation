@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.4 (2025-12-12)
+
+### Changes
+
+* Don't run AGAT stats, point to AnnoOddities for stats instead.
+
 ## 0.1.3 (2025-12-11)
 
 ### New
